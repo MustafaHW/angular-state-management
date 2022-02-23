@@ -30,4 +30,12 @@ export class AuthService {
         );
         return user;
     }
+
+    getErrorMessage(message: string) {
+        if (message == 'Invalid user credentials!') {
+            return 'Invalid user credentials!';
+        } else {
+            return 'Unknown error';
+        }
+    }
 }
