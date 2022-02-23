@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { appReducer } from './store/app.state';
+import { counterReducer } from './counter/state/counter-reducer';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { appReducer } from './store/app.state';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(appReducer),
+    // StoreModule.forRoot(appReducer),
+    StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       // maxAge: 25,
       logOnly: environment.production
