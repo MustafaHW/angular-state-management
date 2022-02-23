@@ -11,6 +11,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { appReducer } from './store/app.state';
 import { counterReducer } from './counter/state/counter-reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,14 @@ import { counterReducer } from './counter/state/counter-reducer';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     // StoreModule.forRoot(appReducer),
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       // maxAge: 25,
       logOnly: environment.production
     }),
+    EffectsModule.forRoot([]),
     // StoreModule.forRoot({ counter: counterReducer, posts: postsReducer })
   ],
   providers: [],
