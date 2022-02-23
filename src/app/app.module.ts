@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,12 +12,14 @@ import { appReducer } from './store/app.state';
 import { counterReducer } from './counter/state/counter-reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
+import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HeaderComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,8 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    // StoreModule.forRoot(appReducer),
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(appReducer),
+    // StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       // maxAge: 25,
       logOnly: environment.production
