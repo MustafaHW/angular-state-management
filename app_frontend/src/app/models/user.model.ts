@@ -1,6 +1,6 @@
 export class User {
     constructor(
-        private access_token: string,
+        private token: string,
         private id: number,
         private email: string,
         private name: string,

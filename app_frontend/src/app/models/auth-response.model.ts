@@ -1,6 +1,6 @@
 export interface AuthResponseData {
-    access_token: string,
-    payload: {
+    token: string,
+    user: {
         id: number,
         email: string,
         name: string,

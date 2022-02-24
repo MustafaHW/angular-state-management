@@ -5,6 +5,7 @@ import { ValidateInputPipe } from './core/pipes/validate.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.setGlobalPrefix('api');
   // handle all user input validation globally
   app.useGlobalPipes(new ValidateInputPipe());

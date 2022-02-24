@@ -28,11 +28,11 @@ export class AuthService {
 
     formatUser(data: AuthResponseData) {
         const user = new User(
-            data.access_token,
-            data.payload.id,
-            data.payload.email,
-            data.payload.name,
-            data.payload.phoneNumber
+            data.token,
+            data.user.id,
+            data.user.email,
+            data.user.name,
+            data.user.phoneNumber
         );
         return user;
     }
@@ -56,11 +56,8 @@ export class AuthService {
     }
 
     getLoginErrorMessage(message: string) {
-        if (message == 'Invalid user credentials!') {
-            return 'Invalid user credentials!';
-        } else {
-            return 'Unknown error';
-        }
+        console.log("getLoginErrorMessage", message);
+        return message;
     }
 
     getSignUpErrorMessage(message: string) {

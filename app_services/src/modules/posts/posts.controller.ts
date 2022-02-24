@@ -37,7 +37,7 @@ export class PostsController {
     }
 
     @UseGuards(AuthGuard('jwt'))
-    @Put(':id')
+    @Post(':id')
     async update(@Param('id') id: number, @Body() post: PostDto, @Request() req): Promise<PostEntity> {
         // get the number of row affected and the updated post
         const { numberOfAffectedRows, updatedPost } = await this.postService.update(id, post, req.user.id);

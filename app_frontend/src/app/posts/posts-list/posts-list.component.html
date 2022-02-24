@@ -4,7 +4,7 @@
         <div>
             <a class="btn btn-primary" [routerLink]="['/posts/add']">Add Post</a>
         </div>
-        <table class="table">
+        <table class="table" *ngIf="posts | async">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
