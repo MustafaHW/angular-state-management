@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { autoLogin, loginStart, loginSuccess, signupStart, signupSuccess } from "./auth.actions";
-import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
+import { autoLogin, loginStart, loginSuccess, logout, signupStart, signupSuccess } from "./auth.actions";
+import { catchError, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
 import { AuthService } from "../../services/auth.service";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
@@ -30,7 +30,7 @@ export class AuthEffects {
                         this.authService.saveUser(user);
                         this.store.dispatch(setLoadingSpinner({ status: false }));
                         this.store.dispatch(setErrorMessage({ message: '' }));
-                        return loginSuccess({ user });
+                        return loginSuccess({ user, redirect: true });
                     }),
                     catchError((error) => {
                         console.log(error);
@@ -47,7 +47,9 @@ export class AuthEffects {
         return this.actions$.pipe(
             ofType(loginSuccess),
             tap((action) => {
-                this.router.navigate(['/']);
+                if (action.redirect == true) {
+                    this.router.navigate(['/']);
+                }
             })
         )
     },
@@ -67,7 +69,7 @@ export class AuthEffects {
                         this.authService.saveUser(user);
                         this.store.dispatch(setLoadingSpinner({ status: false }));
                         this.store.dispatch(setErrorMessage({ message: '' }));
-                        return signupSuccess({ user });
+                        return signupSuccess({ user, redirect: true });
                     }),
                     catchError((error) => {
                         console.log('error ', error);
@@ -84,7 +86,9 @@ export class AuthEffects {
         return this.actions$.pipe(
             ofType(signupSuccess),
             tap((action) => {
-                this.router.navigate(['/']);
+                if (action.redirect == true) {
+                    this.router.navigate(['/']);
+                }
             })
         )
     },
@@ -93,15 +97,26 @@ export class AuthEffects {
         }
     );
 
-    authLogin$ = createEffect(() => {
+    autoLogin$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(autoLogin),
-            map((action) => {
+            mergeMap((action) => {
                 const user = this.authService.getUser();
                 console.log(user);
+                return (of(loginSuccess({ user, redirect: false })));
+            })
+        )
+    });
+
+    logout$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(logout),
+            map((action) => {
+                this.authService.logout();
+                this.router.navigate(['auth'])
             })
         )
     },
         { dispatch: false }
-    )
+    );
 }

@@ -51,6 +51,10 @@ export class AuthService {
         }
     }
 
+    logout(){
+        localStorage.removeItem('userData');
+    }
+
     getLoginErrorMessage(message: string) {
         if (message == 'Invalid user credentials!') {
             return 'Invalid user credentials!';
