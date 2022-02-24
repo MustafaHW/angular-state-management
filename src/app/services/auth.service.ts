@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { AuthResponseData } from "../models/auth-response.model";
+import { SignUpInterface } from "../models/signup.model";
 import { User } from "../models/user.model";
 
 @Injectable({
@@ -20,6 +21,11 @@ export class AuthService {
         );
     }
 
+    signup(data: SignUpInterface): Observable<AuthResponseData> {
+        console.log(data)
+        return this.httpClient.post<AuthResponseData>(`${environment.apiUrl}/auth/register`, data);
+    }
+
     formatUser(data: AuthResponseData) {
         const user = new User(
             data.access_token,
@@ -31,11 +37,21 @@ export class AuthService {
         return user;
     }
 
-    getErrorMessage(message: string) {
+    getLoginErrorMessage(message: string) {
         if (message == 'Invalid user credentials!') {
             return 'Invalid user credentials!';
         } else {
             return 'Unknown error';
         }
+    }
+
+    getSignUpErrorMessage(message: string) {
+        console.log('getSignUpErrorMessage', message)
+        return message;
+        // if (message == 'Invalid user credentials!') {
+        //     return 'Invalid user credentials!';
+        // } else {
+        //     return 'Unknown error';
+        // }
     }
 }

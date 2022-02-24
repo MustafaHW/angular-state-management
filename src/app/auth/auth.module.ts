@@ -5,13 +5,15 @@ import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { AuthRoutingModule } from "./auth-routing.module";
 import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from "./signup/signup.component";
 import { AuthEffects } from "./state/auth.effects";
 import { AuthReducer } from "./state/auth.reducer";
 import { AUTH_STATE_NAME } from "./state/auth.selector";
 
 @NgModule({
     declarations: [
-        LoginComponent
+        LoginComponent,
+        SignUpComponent
     ],
     imports: [
         CommonModule,

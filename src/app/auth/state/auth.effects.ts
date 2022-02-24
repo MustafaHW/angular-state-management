@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { loginStart, loginSuccess } from "./auth.actions";
+import { loginStart, loginSuccess, signupStart, signupSuccess } from "./auth.actions";
 import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
 import { AuthService } from "../../services/auth.service";
 import { Store } from "@ngrx/store";
@@ -33,7 +33,7 @@ export class AuthEffects {
                     }),
                     catchError((error) => {
                         console.log(error);
-                        const errorMessage = this.authService.getErrorMessage(error.error.message);
+                        const errorMessage = this.authService.getLoginErrorMessage(error.error.message);
                         this.store.dispatch(setLoadingSpinner({ status: false }));
                         return of(setErrorMessage({ message: errorMessage }));
                     })
@@ -53,5 +53,41 @@ export class AuthEffects {
         {
             dispatch: false
         }
-    )
+    );
+
+    signup$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(signupStart),
+            exhaustMap((action) => {
+                return this.authService.signup(action.data).pipe(
+                    map((data) => {
+                        console.log('data ', data);
+                        const user = this.authService.formatUser(data);
+                        this.store.dispatch(setLoadingSpinner({ status: false }));
+                        this.store.dispatch(setErrorMessage({ message: '' }));
+                        return signupSuccess({ user });
+                    }),
+                    catchError((error) => {
+                        console.log('error ', error);
+                        const errorSignUp = this.authService.getSignUpErrorMessage(error.error.message);
+                        this.store.dispatch(setLoadingSpinner({ status: false }));
+                        return of(setErrorMessage({ message: errorSignUp }));
+                    })
+                )
+            }),
+        )
+    });
+
+    signupRedirect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(signupSuccess),
+            tap((action) => {
+                this.router.navigate(['/']);
+            })
+        )
+    },
+        {
+            dispatch: false
+        }
+    );
 }
