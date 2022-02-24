@@ -1,42 +1,14 @@
 {
-  "name": "angular-state-management",
-  "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
-  },
-  "private": true,
-  "dependencies": {
-    "@angular/animations": "~12.2.0",
-    "@angular/common": "~12.2.0",
-    "@angular/compiler": "~12.2.0",
-    "@angular/core": "~12.2.0",
-    "@angular/forms": "~12.2.0",
-    "@angular/platform-browser": "~12.2.0",
-    "@angular/platform-browser-dynamic": "~12.2.0",
-    "@angular/router": "~12.2.0",
-    "@ngrx/effects": "^12.5.1",
-    "@ngrx/store": "^12.5.1",
-    "@ngrx/store-devtools": "^12.5.1",
-    "rxjs": "~6.6.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
-  },
-  "devDependencies": {
-    "@angular-devkit/build-angular": "~12.2.7",
-    "@angular/cli": "~12.2.7",
-    "@angular/compiler-cli": "~12.2.0",
-    "@types/jasmine": "~3.8.0",
-    "@types/node": "^12.11.1",
-    "jasmine-core": "~3.8.0",
-    "karma": "~6.3.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.0.3",
-    "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.3.5"
-  }
+    "name": "comfycat",
+    "version": "1.0.0",
+    "scripts": {
+        "front": "cd app_frontend && ng serve",
+        "back": "cd app_services && yarn start:dev",
+        "front-package": "cd app_frontend && rm -Rf node_modules/ && yarn",
+        "back-package": "cd app_services && rm -Rf node_modules/ && yarn",
+        "format": "prettier --write \"app_frontend/src/**/*.ts\" \"app_services/src/**/*.ts\""
+    },
+    "devDependencies": {
+      "prettier": "2.4.1"
+    }
 }
