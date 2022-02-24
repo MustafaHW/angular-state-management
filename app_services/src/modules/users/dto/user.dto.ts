@@ -15,15 +15,16 @@ export class UserDto {
     readonly email: string;
     
     @IsNotEmpty()
+    @MinLength(10)
     readonly phoneNumber: string;
 
     @IsNotEmpty()
     @MinLength(6)
     readonly password: string;
 
-    @IsNotEmpty()
-    @IsEnum(Gender, {
-        message: 'gender must be either male or female',
-    })
+    // @IsNotEmpty()
+    // @IsEnum(Gender, {
+    //     message: 'gender must be either male or female',
+    // })
     readonly gender: Gender;
 }

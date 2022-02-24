@@ -3,7 +3,7 @@ import { IsNotEmpty, MinLength } from 'class-validator';
 export class PostDto {
 
     @IsNotEmpty()
-    @MinLength(4)
+    @MinLength(6)
     readonly title: string;
 
     @IsNotEmpty()
