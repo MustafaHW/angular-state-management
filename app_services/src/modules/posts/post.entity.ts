@@ -14,7 +14,7 @@ export class Post extends Model<Post> {
         type: DataType.TEXT,
         allowNull: false,
     })
-    body: string;
+    description: string;
 
     @ForeignKey(() => User)
     @Column({

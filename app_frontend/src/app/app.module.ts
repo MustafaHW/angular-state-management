@@ -11,9 +11,10 @@ import { environment } from '../environments/environment';
 import { appReducer } from './store/app.state';
 import { counterReducer } from './counter/state/counter-reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { AuthEffects } from './auth/state/auth.effects';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,9 @@ import { AuthEffects } from './auth/state/auth.effects';
     EffectsModule.forRoot([AuthEffects]),
     // StoreModule.forRoot({ counter: counterReducer, posts: postsReducer })
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
