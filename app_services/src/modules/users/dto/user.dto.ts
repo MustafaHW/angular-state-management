@@ -13,6 +13,9 @@ export class UserDto {
     @IsNotEmpty()
     @IsEmail()
     readonly email: string;
+    
+    @IsNotEmpty()
+    readonly phoneNumber: string;
 
     @IsNotEmpty()
     @MinLength(6)

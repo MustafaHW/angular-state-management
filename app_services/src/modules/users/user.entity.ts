@@ -14,6 +14,12 @@ export class User extends Model<User> {
     })
     email: string;
     @Column({
+        type: DataType.STRING(20),
+        unique: true,
+        allowNull: false,
+    })
+    phoneNumber: string;
+    @Column({
         type: DataType.STRING,
         allowNull: false,
     })
@@ -21,7 +27,7 @@ export class User extends Model<User> {
     @Column({
         type: DataType.ENUM,
         values: ['male', 'female'],
-        allowNull: false,
+        allowNull: true,
     })
     gender: string;
 }
