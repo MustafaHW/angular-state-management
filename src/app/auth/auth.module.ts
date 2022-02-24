@@ -20,7 +20,7 @@ import { AUTH_STATE_NAME } from "./state/auth.selector";
         FormsModule,
         ReactiveFormsModule,
         AuthRoutingModule,
-        EffectsModule.forFeature([AuthEffects]),
+        EffectsModule.forFeature([]),
         // StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer)
     ]
 })

@@ -37,6 +37,20 @@ export class AuthService {
         return user;
     }
 
+    saveUser(user: User) {
+        localStorage.setItem('userData', JSON.stringify(user));
+    }
+
+    getUser() {
+        const userData = localStorage.getItem('userData');
+        if(userData){
+            return JSON.parse(userData);
+        }
+        else{
+            return null;
+        }
+    }
+
     getLoginErrorMessage(message: string) {
         if (message == 'Invalid user credentials!') {
             return 'Invalid user credentials!';
@@ -48,10 +62,5 @@ export class AuthService {
     getSignUpErrorMessage(message: string) {
         console.log('getSignUpErrorMessage', message)
         return message;
-        // if (message == 'Invalid user credentials!') {
-        //     return 'Invalid user credentials!';
-        // } else {
-        //     return 'Unknown error';
-        // }
     }
 }

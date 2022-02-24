@@ -13,6 +13,7 @@ import { counterReducer } from './counter/state/counter-reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
+import { AuthEffects } from './auth/state/auth.effects';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loa
       // maxAge: 25,
       logOnly: environment.production
     }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AuthEffects]),
     // StoreModule.forRoot({ counter: counterReducer, posts: postsReducer })
   ],
   providers: [],
